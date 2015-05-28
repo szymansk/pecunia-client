@@ -105,7 +105,7 @@
     if (code != 0) {
         [currentUserController remove: self];
     }
-    [[self window] makeKeyAndOrderFront: self];
+    //[[self window] makeKeyAndOrderFront: self];
     [MOAssistant.assistant.memContext reset];
 }
 
@@ -158,7 +158,8 @@
 
         if (step == 1) {
             [self startProgressWithMessage: NSLocalizedString(@"AP212", nil)];
-            [self performSelector: @selector(getBankSetupInfo) withObject: nil afterDelay: 0];
+            [self getBankSetupInfo];
+            //[self performSelector: @selector(getBankSetupInfo) withObject: nil afterDelay: 0];
             return;
         }
 
@@ -207,6 +208,7 @@
 
                 [userSheet orderOut: sender];
                 [NSApp endSheet: userSheet returnCode: 0];
+                return;
             }
         }
         if (step >= 3 && currentUser.hbciVersion == nil) {
@@ -328,7 +330,7 @@
         }
     }
 }
-
+/*
 - (void)endSheet: (id)sender
 {
     [currentUserController commitEditing];
@@ -338,11 +340,17 @@
     [userSheet orderOut: sender];
     [NSApp endSheet: userSheet returnCode: 0];
 }
+ */
 
 - (BOOL)windowShouldClose: (id)sender
 {
     [NSApp stopModalWithCode: 1];
     return YES;
+}
+
+- (void)windowWillClose: (NSNotification *)notification
+{
+    NSLog(@"Window is closed");
 }
 
 - (void)windowDidBecomeKey: (NSNotification *)notification
@@ -474,12 +482,9 @@
 
 - (IBAction)close: (id)sender
 {
-    [[self window] orderOut: self];
-}
-
-- (IBAction)add: (id)sender
-{
-    [[self window] close];
+    [self.window close];
+    [NSApp stopModalWithCode:1];
+    //[[self window] orderOut: self];
 }
 
 - (IBAction)allSettings: (id)sender

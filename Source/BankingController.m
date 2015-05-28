@@ -1127,12 +1127,9 @@ static BankingController *bankinControllerInstance;
 {
     LogEnter;
 
-    if (bankUserController == nil) {
-        bankUserController = [[NewBankUserController alloc] initForController: self];
-    }
-
-    [[bankUserController window] makeKeyAndOrderFront: self];
-
+    NewBankUserController * controller = [[NewBankUserController alloc] initForController: self];
+    [NSApp runModalForWindow: controller.window];
+    
     LogLeave;
 }
 
