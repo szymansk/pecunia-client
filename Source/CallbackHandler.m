@@ -298,6 +298,7 @@ static CallbackHandler *callbackHandler = nil;
     }
     if ([data.command isEqualToString:@"ctReadBankData"]) {
         NSString *res = [[ChipcardHandler handler] readBankData:data.proposal];
+        LogInfo(@"BankData: %@", res);
         if (res == nil) {
             return @"<error>";
         } else {
@@ -320,6 +321,7 @@ static CallbackHandler *callbackHandler = nil;
         }
     }
     if ([data.command isEqualToString:@"ctSaveBankData"]) {
+        LogInfo(@"Bankdata to be saved: %@", data.proposal);
         if ([[ChipcardHandler handler] saveBankData:data.proposal]) {
             return @"<ok>";
         } else {
