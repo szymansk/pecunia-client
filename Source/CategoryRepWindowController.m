@@ -188,6 +188,8 @@ static NSString *const PecuniaHitNotification = @"PecuniaMouseHit";
     [helpText setAttributedStringValue: text];
     NSRect bounds = [text boundingRectWithSize: NSMakeSize(helpText.bounds.size.width, 0) options: NSStringDrawingUsesLineFragmentOrigin];
     helpContentView.frame = NSMakeRect(0, 0, helpText.bounds.size.width + 20, bounds.size.height + 20);
+    
+    helpPopover.appearance = NSPopoverAppearanceMinimal;
 
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(mouseHit:)

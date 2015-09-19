@@ -429,6 +429,8 @@ extern void *UserDefaultsBindingContext;
     shadow.shadowOffset = NSMakeSize(1, -1);
     shadow.shadowBlurRadius = 3;
     selectionBox.shadow = shadow;
+    
+    helpPopover.appearance = NSPopoverAppearanceMinimal;
 
     // Notifications.
     [[NSNotificationCenter defaultCenter] addObserver: self
